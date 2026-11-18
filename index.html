@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cronômetro de Aula</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="dark">
+  <!-- Barra de progresso no topo (modo temporizador) -->
+  <div class="progress-track">
+    <div id="progressBar" class="progress-bar"></div>
+  </div>
+
+  <!-- Barra superior -->
+  <header class="top-bar hide-in-focus">
+    <div class="mode-switch">
+      <button id="btnModeTimer" class="tab active" type="button">Temporizador</button>
+      <button id="btnModeStopwatch" class="tab" type="button">Cronômetro</button>
+    </div>
+
+    <div class="utility-buttons">
+      <button id="btnSound" class="icon-btn" type="button" title="Ativar/Desativar som (M)">Som: ON</button>
+      <button id="btnTheme" class="icon-btn" type="button" title="Alternar tema Claro/Escuro">Tema Claro</button>
+      <button id="btnFocus" class="icon-btn" type="button" title="Ocultar controles (H)">Modo Foco</button>
+      <button id="btnFullscreen" class="icon-btn" type="button" title="Tela cheia (F)">Tela Cheia</button>
+    </div>
+  </header>
+
+  <!-- Área central gigante -->
+  <main class="stage">
+    <h1
+      id="activityTitle"
+      class="activity-title"
+      contenteditable="true"
+      spellcheck="false"
+      title="Clique para editar o título da atividade"
+    >Atividade em Sala</h1>
+
+    <div id="display" class="display">15:00</div>
+
+    <p id="statusMessage" class="status-message" aria-live="polite"></p>
+
+    <!-- Controles principais -->
+    <div class="main-controls hide-in-focus">
+      <button id="btnStartPause" class="btn btn-primary" type="button">Iniciar</button>
+      <button id="btnReset" class="btn btn-secondary" type="button">Reiniciar</button>
+      <button id="btnAdd1" class="btn btn-ghost timer-only" type="button">+1 min</button>
+      <button id="btnAdd5" class="btn btn-ghost timer-only" type="button">+5 min</button>
+    </div>
+
+    <!-- Presets e tempo personalizado (apenas no Temporizador) -->
+    <section class="timer-settings hide-in-focus timer-only">
+      <div class="presets">
+        <button class="preset-btn" data-minutes="1" type="button">1 min</button>
+        <button class="preset-btn" data-minutes="5" type="button">5 min</button>
+        <button class="preset-btn" data-minutes="10" type="button">10 min</button>
+        <button class="preset-btn active" data-minutes="15" type="button">15 min</button>
+        <button class="preset-btn" data-minutes="20" type="button">20 min</button>
+        <button class="preset-btn" data-minutes="30" type="button">30 min</button>
+        <button class="preset-btn" data-minutes="45" type="button">45 min</button>
+        <button class="preset-btn" data-minutes="60" type="button">60 min</button>
+      </div>
+
+      <form id="customForm" class="custom-form">
+        <label>
+          <span>Min</span>
+          <input id="inputMinutes" type="number" min="0" max="999" value="15" />
+        </label>
+        <label>
+          <span>Seg</span>
+          <input id="inputSeconds" type="number" min="0" max="59" value="0" />
+        </label>
+        <button class="btn btn-secondary btn-small" type="submit">Definir</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Rodapé com atalhos -->
+  <footer class="footer hide-in-focus">
+    Atalhos: <kbd>Espaço</kbd> Iniciar/Pausar · <kbd>R</kbd> Reiniciar · <kbd>H</kbd> Modo Foco · <kbd>F</kbd> Tela Cheia · <kbd>M</kbd> Som
+  </footer>
+
+  <!-- Botão discreto para sair do Modo Foco -->
+  <button id="btnExitFocus" class="exit-focus-btn" type="button">
+    Mostrar controles (H)
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>

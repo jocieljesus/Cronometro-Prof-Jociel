@@ -1,0 +1,380 @@
+:root {
+  --bg: #0b1020;
+  --surface: #151c33;
+  --surface-hover: #1f2947;
+  --border: #28355c;
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --accent: #38bdf8;
+  --accent-text: #04131c;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --progress: #38bdf8;
+}
+
+body.light {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface-hover: #e2e8f0;
+  --border: #cbd5e1;
+  --text: #0f172a;
+  --muted: #475569;
+  --accent: #0284c7;
+  --accent-text: #ffffff;
+  --warning: #d97706;
+  --danger: #dc2626;
+  --progress: #0284c7;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  user-select: none;
+}
+
+/* Barra de progresso */
+.progress-track {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background-color: var(--surface);
+  z-index: 20;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 100%;
+  background-color: var(--progress);
+  transition: width 0.2s linear, background-color 0.25s ease;
+}
+
+/* Barra superior */
+.top-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 28px 12px;
+}
+
+.mode-switch {
+  display: inline-flex;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 4px;
+  gap: 4px;
+}
+
+.tab {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  padding: 8px 16px;
+  border-radius: 7px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.tab.active {
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+.utility-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.icon-btn {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.icon-btn:hover {
+  background: var(--surface-hover);
+}
+
+/* Palco central */
+.stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px;
+  text-align: center;
+  gap: 20px;
+}
+
+.activity-title {
+  font-size: clamp(1.5rem, 3.2vw, 3rem);
+  font-weight: 700;
+  color: var(--muted);
+  padding: 6px 16px;
+  border-radius: 10px;
+  border: 1px dashed transparent;
+  outline: none;
+  user-select: text;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.activity-title:hover,
+.activity-title:focus {
+  border-color: var(--border);
+  color: var(--text);
+}
+
+/* Visor gigante */
+.display {
+  font-size: clamp(5rem, 24vw, 22rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  transition: color 0.25s ease;
+}
+
+/* Ajuste automático quando passa de 1 hora (HH:MM:SS) */
+.display.has-hours {
+  font-size: clamp(3.5rem, 16vw, 15rem);
+}
+
+.display.warning {
+  color: var(--warning);
+}
+
+.display.danger {
+  color: var(--danger);
+  animation: pulse 1s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.72;
+    transform: scale(1.015);
+  }
+}
+
+.status-message {
+  min-height: 2rem;
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--danger);
+}
+
+/* Controles principais */
+.main-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.btn {
+  border: none;
+  border-radius: 12px;
+  padding: 14px 28px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.1s ease, background-color 0.2s ease;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-text);
+  min-width: 150px;
+}
+
+.btn-secondary {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  background: var(--surface-hover);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-ghost:hover {
+  background: var(--surface);
+}
+
+.btn-small {
+  padding: 10px 18px;
+  font-size: 0.95rem;
+}
+
+/* Presets e tempo personalizado */
+.timer-settings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.presets {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.preset-btn {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.preset-btn:hover {
+  background: var(--surface-hover);
+}
+
+.preset-btn.active {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.custom-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.custom-form label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.custom-form input {
+  width: 72px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Rodapé */
+.footer {
+  text-align: center;
+  padding: 14px 20px 20px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+kbd {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 2px 6px;
+  font-family: inherit;
+  font-size: 0.8rem;
+  color: var(--text);
+}
+
+/* Ocultar itens do temporizador quando estiver no modo cronômetro */
+body.stopwatch-mode .timer-only {
+  display: none;
+}
+
+body.stopwatch-mode .progress-track {
+  opacity: 0;
+}
+
+/* Modo Foco */
+.exit-focus-btn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--surface);
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0.55;
+  transition: opacity 0.2s;
+}
+
+.exit-focus-btn:hover {
+  opacity: 1;
+}
+
+body.focus-mode .hide-in-focus {
+  display: none;
+}
+
+body.focus-mode .exit-focus-btn {
+  display: block;
+}
+
+body.focus-mode .display {
+  font-size: clamp(6rem, 28vw, 26rem);
+}
+
+body.focus-mode .display.has-hours {
+  font-size: clamp(4rem, 19vw, 18rem);
+}
